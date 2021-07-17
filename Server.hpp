@@ -7,6 +7,11 @@
 #include <netinet/in.h>
 
 
+// for errno and exceptions
+#include <cerrno>
+
+
+#define MAX_CLIENTS 1000
 
 class Server {
 public:
@@ -17,22 +22,24 @@ private:
 
 private:
 	int _m_socket;
-
-
-//	struct GradeTooLowException : public std::exception {
-//		GradeTooLowException() throw() {};
-//		virtual const char* what() const throw() {return "Grade is too low!";}
-//	};
 };
 
 
 struct Server_start_exception : public std::exception {
-	enum eWhat_messages {
-
+	char *error;
+	bool flag_for_errno;
+	Server_start_exception(char *err) throw() {
+		error = err;
+		flag_for_errno = false;
 	};
-	std::string what_message;
-	Server_start_exception() throw() {};
-	virtual const char *what() const throw() { return "Grade is too high!";};
+	Server_start_exception(bool err) throw() {
+		flag_for_errno = true;
+	};
+	virtual const char *what() const throw() {
+		if (flag_for_errno)
+			return std::strerror(errno);
+		return error;
+	};
 };
 
 #endif //PROJECT_NAME_SERVER_HPP
