@@ -12,6 +12,13 @@ int Server::start() {
 		std::cerr << "IN START METHOD, IN SERVER: " << e.what() << std::endl;
 		return -1;
 	}
+
+	std::cout << "Bind sockets successful, server start" << std::endl;
+
+	//TODO need read some shit about asynchronous, synchronous, nonsynchronous methods accepts
+	while (true) {
+		return 1;
+	}
 	return 0;
 }
 
