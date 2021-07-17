@@ -1,0 +1,10 @@
+#ifndef PROJECT_NAME_SERVER_HPP
+#define PROJECT_NAME_SERVER_HPP
+
+
+class Server {
+
+};
+
+
+#endif //PROJECT_NAME_SERVER_HPP
