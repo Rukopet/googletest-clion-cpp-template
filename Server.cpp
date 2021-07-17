@@ -16,4 +16,16 @@ int Server::_socket_init() {
 	sa_server.sin_addr.s_addr = INADDR_ANY;
 	sa_server.sin_family = AF_INET;
 	sa_server.sin_port = htons(SOME_PORT);
+
+
+	// https://www.opennet.ru/docs/RUS/socket/node3.html
+	// explain how and why cast sockaddr_in to sockaddr
+	if (bind(_m_socket, (sockaddr*)&sa_server, sizeof(sa_server)) != 0)
+	{
+		return -1;
+	}
+
+
+
+
 }
